@@ -48,7 +48,7 @@ Gemini 2.5 Flash, combined with embeddings and a Retrieval-Augmented Generation 
 
 - **AI-Powered Recipe Generation:** Uses Gemini 2.5 Flash to generate recipes from ingredients.
   
-- **Smart Recipe Matching:** Converts ingredients, conditions, and existing recipes into embeddings using sentence transformers (all-MiniLM-L6-v2) to find similar recipes and provide context-aware AI suggestions.
+- **Smart Recipe Matching:** Converts ingredients, conditions, and existing recipes into embeddings using Hugging Face (all-MiniLM-L6-v2) to find similar recipes and provide context-aware AI suggestions.
 
 - **Ingredient-Based Suggestions:** Provides recipes based on what users have at home.
 
