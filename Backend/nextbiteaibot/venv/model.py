@@ -43,7 +43,7 @@ def find_similar_recipes(user_ingredients):
 
 # generates recipes with Gemini
 
-def generate_recipe_gemini(ingredients, similar_recipes, conditions=None):
+def generate_recipe_gemini(ingredients, similar_recipes, conditions=None, meal_size=None, meal_type=None, servings=None, exclude=None):
     ingredient_text = ', '.join(ingredients)
     condition_lines = []
     if conditions:
@@ -61,6 +61,18 @@ def generate_recipe_gemini(ingredients, similar_recipes, conditions=None):
                 condition_lines.append("Keep the recipe fun, simple, and not spicy.")
             elif c == 'health-conscious':
                 condition_lines.append("Use whole ingredients and healthy cooking methods.")
+
+    if exclude:
+        condition_lines.append(f"Exclude these ingredients: {', '.join(exclude)}.")
+
+    
+    if meal_size:
+        condition_lines.append(f"Make the recipe portion size {meal_size.lower()}.")
+    if meal_type:
+        condition_lines.append(f"This should be a {meal_type.lower()} recipe.")
+    if servings:
+        condition_lines.append(f"Adjust ingredients for {servings} servings.")
+
 
     condition_text = "\n".join(condition_lines)
 

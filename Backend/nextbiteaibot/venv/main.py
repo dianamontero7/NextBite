@@ -22,6 +22,11 @@ app.add_middleware(
 class ChatRequest(BaseModel):
     ingredients: list
     conditions: list = []
+    meal_size: str = None
+    meal_type: str = None
+    servings: int = None
+    exclude: list = []
+
 
 # defining the POST endpoint 
 
@@ -29,13 +34,17 @@ class ChatRequest(BaseModel):
 async def get_recipe(data: ChatRequest):
 
     similar = find_similar_recipes(data.ingredients)
-    ai_recipe = generate_recipe_gemini(data.ingredients, similar, data.conditions)
+    ai_recipe = generate_recipe_gemini(data.ingredients, similar, data.conditions, meal_size=data.meal_size, meal_type=data.meal_type, servings=data.servings, exclude=data.exclude)
 
     # stores in mongodb
 
     recipe_doc = {
         "ingredients": data.ingredients,
         "conditions": data.conditions,
+        "meal_size": data.meal_size,
+        "meal_type": data.meal_type,
+        "servings": data.servings,
+        "exclude": data.exclude,
         "recipe": ai_recipe,
         "created_at": datetime.utcnow()
     }
