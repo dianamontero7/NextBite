@@ -24,7 +24,7 @@ const Works = () => {
             <img src={image2} className="card-img-top" alt="Step 1" />
             <div className="card-body">
               <h5 className="card-title"><Refrigerator color="#009966" style={{marginRight: '6.5px'}} /> 1. Tell Us What You Have</h5>
-              <p className="card-text">Got leftovers? Just tell the generator a few ingredients you have on hand—like “rice, chicken, broccoli.” Trying to eat healthier or avoid certain foods? No problem. Add your preferences, and we’ll tailor the recipe for you.</p>
+              <p className="card-text">Got leftovers? Tell the generator what you have—like ‘rice, chicken, broccoli.’ Choose meal size, type, servings, dietary preferences, or exclude ingredients, and we’ll craft the perfect recipe.</p>
             </div>
           </div>
         </div>

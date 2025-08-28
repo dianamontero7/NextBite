@@ -5,6 +5,10 @@ import RecipeCard from '../components/Recipecard';
 const Chatbot = () => {
   const [ingredients, setIngredients] = useState('');
   const [conditions, setConditions] = useState('');
+  const [mealSize, setMealSize] = useState('');
+  const [mealType, setMealType] = useState('');
+  const [servings, setServings] = useState('');
+  const [exclude, setExclude] = useState('');
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -13,7 +17,13 @@ const Chatbot = () => {
 
     // add the user's message to chat
     
-    const userMessage = `Leftover Ingredients: ${ingredients}\nDietary Preferences: ${conditions}`;
+    const userMessage = `Ingredients: ${ingredients}
+Dietary Preferences: ${conditions}
+Meal Size: ${mealSize}
+Meal Type: ${mealType}
+Servings: ${servings}
+Exclude: ${exclude}`;
+
     setMessages(prev => [...prev, { sender: 'user', text: userMessage }]);
     setLoading(true);
 
@@ -21,6 +31,7 @@ const Chatbot = () => {
 
     const inputIngredients = ingredients.split(',').map(i => i.trim());
     const inputConditions = conditions.split(',').map(c => c.trim());
+    const inputExclude = exclude ? exclude.split(',').map(e => e.trim()) : [];
 
     // send ingredients and preferences to backend API
     
@@ -28,7 +39,14 @@ const Chatbot = () => {
       const res = await fetch('http://localhost:8000/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ingredients: inputIngredients, conditions: inputConditions }),
+        body: JSON.stringify({ 
+          ingredients: inputIngredients, 
+          conditions: inputConditions,
+          meal_size: mealSize || null,
+          meal_type: mealType || null,
+          servings: servings ? parseInt(servings) : null,
+          exclude: inputExclude
+        }),
       });
 
       const data = await res.json();
@@ -49,6 +67,11 @@ const Chatbot = () => {
     setLoading(false);
     setIngredients('');
     setConditions('');
+    setMealSize('');
+    setMealType('');
+    setServings('');
+    setExclude('');
+
   };
 
   return (
@@ -89,6 +112,36 @@ const Chatbot = () => {
           value={conditions}
           onChange={(e) => setConditions(e.target.value)}
         />
+
+        <select value={mealSize} onChange={(e) => setMealSize(e.target.value)}>
+          <option value="" disabled hidden>Select Meal Size</option>
+          <option value="small">Small / Light</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large / Hearty</option>
+        </select>
+
+        <select value={mealType} onChange={(e) => setMealType(e.target.value)}>
+          <option value="" disabled hidden>Select Meal Type</option>
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+          <option value="snack">Snack</option>
+        </select>
+
+        <input
+          type="number"
+          placeholder="Servings"
+          value={servings}
+          onChange={(e) => setServings(e.target.value)}
+        />
+
+        <input
+          type="text"
+          placeholder="Exclude ingredients..."
+          value={exclude}
+          onChange={(e) => setExclude(e.target.value)}
+        />
+
         <button onClick={handleSubmit}>Generate Recipe</button>
 
 
