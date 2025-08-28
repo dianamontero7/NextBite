@@ -7,7 +7,7 @@ The application exists to promote sustainability, help users cook creatively wit
 # Developers: Diana Montero & Joshua Moore
 
 # Description of AI Model
-Gemini 2.5 Flash, combined with embeddings and a Retrieval-Augmented Generation (RAG) system, allows NextBite to create smart, personalized recipes. The RAG system works like this: first, it finds recipes that are similar to your ingredients from the database using embeddings (which help the AI understand the meaning of the ingredients). Then, it feeds these similar recipes to Gemini, so the AI can generate a new, personalized recipe that makes sense with what you have and any dietary conditions.
+Gemini 2.5 Flash, combined with embeddings and a Retrieval-Augmented Generation (RAG) system, allows NextBite to create smart, personalized recipes. The RAG system works like this: first, it finds recipes that are similar to your ingredients from the database using embeddings (which help the AI understand the meaning of the ingredients). Then, it feeds these similar recipes to Gemini, so the AI can generate a new, personalized recipe that makes sense with what you have, your meal size, type, servings, dietary preferences, and any ingredients you want to avoid.
 
 # Installation Instructions - set up project locally 
 
@@ -39,7 +39,7 @@ Gemini 2.5 Flash, combined with embeddings and a Retrieval-Augmented Generation 
 
 # Usage Guide
 
-- **User interaction:** Input available leftover ingredients and dietary preferences (optional)
+- **User interaction:** Input available leftover ingredients, then optionally select dietary preferences, meal size, type, servings, or ingredients to avoid.
 - **Backend Processing:** Handles requests, finds similar recipes, and communicates with the Gemini AI model to generate new recipes
 - **Frontend Display:** Shows AI-generated recipes in a clean, easy-to-read interface.
 - **Database Storage:** Stores user interactions and generated recipes in MongoDB Atlas for future reference
@@ -52,7 +52,7 @@ Gemini 2.5 Flash, combined with embeddings and a Retrieval-Augmented Generation 
 
 - **Ingredient-Based Suggestions:** Provides recipes based on what users have at home.
 
-- **Dietary Conditions Handling:** Accounts for user dietary restrictions.
+- **User Preferences Handling:** Accounts for dietary restrictions, meal size, type, servings, and ingredients to avoid.
 
 - **User-Friendly Interface:** Clean, responsive frontend.
 
