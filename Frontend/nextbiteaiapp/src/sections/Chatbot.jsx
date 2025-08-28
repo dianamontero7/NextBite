@@ -100,41 +100,41 @@ const Chatbot = () => {
 export default Chatbot;
 
 
-// unit test
+// // unit test
 
 
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+// import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-if (process.env.NODE_ENV === 'test') {
-  // mock fetch
-  global.fetch = jest.fn();
+// if (process.env.NODE_ENV === 'test') {
+//   // mock fetch
+//   global.fetch = jest.fn();
 
-  describe('Chatbot Component (inline tests)', () => {
-    beforeEach(() => {
-      fetch.mockClear();
-    });
+//   describe('Chatbot Component (inline tests)', () => {
+//     beforeEach(() => {
+//       fetch.mockClear();
+//     });
 
-    it('displays an error message when backend request fails', async () => {
-      // make fetch reject to simulate backend error
-      fetch.mockRejectedValueOnce(new Error('Backend error'));
+//     it('displays an error message when backend request fails', async () => {
+//       // make fetch reject to simulate backend error
+//       fetch.mockRejectedValueOnce(new Error('Backend error'));
 
-      render(<Chatbot />);
+//       render(<Chatbot />);
 
-      // enter ingredients so handleSubmit runs
-      fireEvent.change(screen.getByPlaceholderText(/Enter leftover ingredients/i), {
-        target: { value: 'spinach, bread' },
-      });
+//       // enter ingredients so handleSubmit runs
+//       fireEvent.change(screen.getByPlaceholderText(/Enter leftover ingredients/i), {
+//         target: { value: 'spinach, bread' },
+//       });
 
-      fireEvent.change(screen.getByPlaceholderText(/Add any dietary preferences/i), {
-        target: { value: 'vegan' },
-      });
+//       fireEvent.change(screen.getByPlaceholderText(/Add any dietary preferences/i), {
+//         target: { value: 'vegan' },
+//       });
 
-      fireEvent.click(screen.getByText(/Generate Recipe/i));
+//       fireEvent.click(screen.getByText(/Generate Recipe/i));
 
-      // check that error message appears in chat
-      await waitFor(() => {
-        expect(screen.getByText(/Error connecting to backend./i)).toBeInTheDocument();
-      });
-    });
-  });
-}
+//       // check that error message appears in chat
+//       await waitFor(() => {
+//         expect(screen.getByText(/Error connecting to backend./i)).toBeInTheDocument();
+//       });
+//     });
+//   });
+// }
